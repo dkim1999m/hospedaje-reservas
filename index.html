@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hospedaje Plaza - Reservas</title>
+  <meta name="description" content="Reserva de habitaciones - Hospedaje Plaza" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-content">
+      <h1>Hospedaje Plaza</h1>
+      <p class="subtitle">Sistema de reservas (demo para GitHub Pages)</p>
+    </div>
+  </header>
+
+  <main class="container grid-main">
+    <!-- Sección izquierda -->
+    <section class="card">
+      <h2>1) Selecciona fechas y habitación</h2>
+
+      <form id="bookingForm" novalidate>
+        <div class="grid-2">
+          <label>
+            Nombre completo
+            <input type="text" id="name" placeholder="Ej. Juan Pérez" required />
+          </label>
+
+          <label>
+            DNI / Documento
+            <input type="text" id="doc" placeholder="Ej. 12345678" required />
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label>
+            Teléfono
+            <input type="tel" id="phone" placeholder="Ej. 987654321" required />
+          </label>
+
+          <label>
+            Correo (opcional)
+            <input type="email" id="email" placeholder="Ej. correo@gmail.com" />
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label>
+            Check-in
+            <input type="date" id="checkin" required />
+          </label>
+
+          <label>
+            Check-out
+            <input type="date" id="checkout" required />
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label>
+            Nº de huéspedes
+            <input type="number" id="guests" min="1" max="4" value="1" required />
+          </label>
+
+          <label>
+            Tipo de habitación
+            <select id="roomType" required>
+              <option value="">-- Selecciona --</option>
+              <option value="simple">Simple (8 disponibles)</option>
+              <option value="doble">Doble 2 camas (4 disponibles)</option>
+              <option value="privada">Baño privado (1 disponible)</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Habitación específica
+          <select id="roomSelect" required>
+            <option value="">Primero elige tipo y fechas</option>
+          </select>
+        </label>
+
+        <label>
+          Mensaje adicional (opcional)
+          <textarea id="notes" rows="3" placeholder="Hora estimada de llegada, preferencias, etc."></textarea>
+        </label>
+
+        <div class="summary" id="summaryBox">
+          <p>Noches: <strong id="nights">0</strong></p>
+          <p>Tarifa por noche: <strong id="rate">S/ 0.00</strong></p>
+          <p>Total estimado: <strong id="total">S/ 0.00</strong></p>
+          <p>Adelanto sugerido (30%): <strong id="deposit">S/ 0.00</strong></p>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" id="previewBtn">Previsualizar reserva</button>
+          <button type="submit" class="btn btn-primary">Confirmar y enviar a WhatsApp</button>
+        </div>
+      </form>
+
+      <div id="result" class="result hidden"></div>
+    </section>
+
+    <!-- Sección derecha -->
+    <aside class="card">
+      <h2>2) Estado de habitaciones</h2>
+      <p class="hint">
+        Verde = libre, Rojo = ocupada (simulado).  
+        Se guarda en tu navegador para demo.
+      </p>
+
+      <div id="roomLegend" class="legend">
+        <span><i class="dot free"></i> Libre</span>
+        <span><i class="dot busy"></i> Ocupada</span>
+      </div>
+
+      <div id="roomsGrid" class="rooms-grid"></div>
+
+      <hr />
+
+      <h3>Pagos de reserva</h3>
+      <ul class="payments">
+        <li><strong>Yape:</strong> 927137867</li>
+        <li><strong>Plin:</strong> 927137867</li>
+        <li><strong>Titular:</strong> Hospedaje Plaza</li>
+      </ul>
+
+      <p class="hint">
+        Luego puedes añadir QR de Yape/Plin en la carpeta <code>assets/</code>.
+      </p>
+
+      <hr />
+
+      <h3>Contacto rápido</h3>
+      <a class="btn btn-whatsapp" id="whatsDirect" target="_blank" rel="noopener noreferrer">
+        Escribir por WhatsApp
+      </a>
+    </aside>
+  </main>
+
+  <section class="container card">
+    <h2>3) Panel demo (admin local)</h2>
+    <p class="hint">
+      Solo para maqueta: marca habitaciones como ocupadas/libres.  
+      Esto NO es multiusuario real, solo simulación local.
+    </p>
+    <div id="adminPanel" class="admin-panel"></div>
+    <div class="actions">
+      <button class="btn btn-secondary" id="resetDemo">Restablecer demo</button>
+      <button class="btn btn-secondary" id="exportData">Exportar reservas (JSON)</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Hospedaje Plaza - Demo GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
